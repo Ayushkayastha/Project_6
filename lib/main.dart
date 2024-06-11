@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project6/bottom_nav_bar.dart';
+import 'package:project6/backend/API/HotelDetails.dart'; // Import the HotelDetails class
+
 
 void main() {
   runApp(const MyApp());
@@ -23,7 +25,7 @@ class MyApp extends StatelessWidget {
             ),
         ),
       ),
-      home: Bottomnavbar(),
+      home:  Bottomnavbar(),
     );
   }
 }

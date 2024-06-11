@@ -8,6 +8,7 @@ import 'package:project6/features/widget/customsearch_delegate.dart';
 import 'package:project6/features/widget/hotel_card.dart';
 import 'package:project6/backend/API/HotelDetails.dart';
 
+
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
 
@@ -20,20 +21,23 @@ class _HomepageState extends State<Homepage> {
   bool _isDatePickerVisible = false;// Track the selected dates
   HotelDetails hotelDetails = HotelDetails();
 
+
   @override
   Widget build(BuildContext context) {
 
     Color mycolor =Color.fromARGB(255, 81, 212, 194);
+    print("Homepage: ${hotelDetails.count}");
 
     return Scaffold(
       body:
+
       Stack(
         children: [
           Container(
             child: ListView(
-            
+
               children: [
-            
+
                 if (_isDatePickerVisible == true)
                   Container(
                     width: MediaQuery.of(context).size.width,
@@ -168,13 +172,15 @@ class _HomepageState extends State<Homepage> {
                         price: hotelDetails.price[index].toString(),
                         reviews: '80 Reviews',
                         rating: hotelDetails.hotelRatings[index],
+                        hotelDetails: hotelDetails,
                       );
 
                     },
                   ),
                 ),
-            
+
               ],
+
             ),
           ),
 
@@ -240,6 +246,7 @@ class _HomepageState extends State<Homepage> {
 
         ],
       ),
+
     );
   }
 

@@ -12,8 +12,19 @@ class Favorite extends StatefulWidget {
 
 class _FavoriteState extends State<Favorite> {
   HotelDetails hotelDetails = HotelDetails();
+
   @override
   Widget build(BuildContext context) {
+
+    List<int> FavHotel=[];
+    print("Hotel Count: ${hotelDetails.count}");
+    for(int i=0;i<hotelDetails.count.length;i++)
+    {
+      if(hotelDetails.count[i])
+        {FavHotel.add(i);
+        }
+    }
+    print(FavHotel);
     return Scaffold(
 
       appBar: AppBar(
@@ -29,21 +40,26 @@ class _FavoriteState extends State<Favorite> {
     ),
     ),
 
-    body: Padding(
+    body:
+      Padding(
       padding: const EdgeInsets.all(8.0),
       child: ListView.builder(
-        itemCount:hotelDetails.name.length,
+        itemCount:FavHotel.length,
         itemBuilder: (context,index){
-          return HotelCard(
-            index: index,
-            imageUrl: 'https://via.placeholder.com/150',
-            name: hotelDetails.name[index],
-            location: hotelDetails.address[index],
-            distance: '2 km to city',
-            price: hotelDetails.price[index].toString(),
-            reviews: '80 Reviews',
-            rating: hotelDetails.hotelRatings[index],
-          );
+          int favIndex = FavHotel[index];
+          return
+
+            HotelCard(
+              index: favIndex,
+              imageUrl: 'https://via.placeholder.com/150',
+              name: hotelDetails.name[favIndex],
+              location: hotelDetails.address[favIndex],
+              distance: '2 km to city',
+              price: hotelDetails.price[favIndex].toString(),
+              reviews: '80 Reviews',
+              rating: hotelDetails.hotelRatings[favIndex],
+              hotelDetails: hotelDetails,
+            );
 
         },
       ),
