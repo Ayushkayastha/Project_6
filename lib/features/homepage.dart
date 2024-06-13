@@ -49,7 +49,9 @@ class _HomepageState extends State<Homepage> {
                         color: Colors.transparent,
                       ),
                     ),
-                  ),//this container is responsible for making backgroung blur
+                  ),
+
+                //this container is responsible for making backgroung blur
                 Padding(
                   padding: const EdgeInsets.only(left: 8.0,right: 8.0),
                   child: Card(
@@ -110,6 +112,7 @@ class _HomepageState extends State<Homepage> {
                                       },
                                    ),
                             ),
+
                            ],
                            ),
                         ),
@@ -154,9 +157,9 @@ class _HomepageState extends State<Homepage> {
 
                   ),
                 ),
-                SizedBox(height: 8.0),
+
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(12.0),
                   child: ListView.builder(
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
@@ -178,9 +181,39 @@ class _HomepageState extends State<Homepage> {
                     },
                   ),
                 ),
-
               ],
 
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: mycolor,
+                      ),
+                      height: 44,
+                      child: IconButton(
+                        icon:
+                        Image.asset('assets/icons/filter_icon.png', color: Colors.white,),
+                        onPressed:(){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Filter(),
+                            ),
+                          );                        }
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
 

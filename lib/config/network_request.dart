@@ -1,15 +1,31 @@
-import 'package:flutter/material.dart';
+import 'package:dio/dio.dart';
+import 'package:project6/config/api_endpoints.dart';
+import 'HotelModel.dart';
 
-class NetworkRequest extends StatefulWidget {
-  const NetworkRequest({super.key});
+class NetworkRequest {
+  final dio = Dio();
 
-  @override
-  State<NetworkRequest> createState() => _NetworkRequestState();
-}
+  Future<HotelModel?> hotelmodel() async {
+    try {
+      final response = await dio.get(ApiEndpoints.details);
 
-class _NetworkRequestState extends State<NetworkRequest> {
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        // Success
+        print('joke');
+        print(response);
+        return HotelModel.fromJson(response.data);
+      }
+
+      else {
+        // Failure
+        print('Failed to load data: ${response.statusCode}');
+        return null;
+      }
+    } catch (e) {
+      // Handle any other errors, like network issues
+      print('Error occurred catch bhitra: $e');
+      return null;
+    }
   }
 }

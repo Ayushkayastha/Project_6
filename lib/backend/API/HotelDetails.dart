@@ -1,4 +1,5 @@
 class HotelDetails {
+
  List<String> name=[
    "The Ritz-Carlton",
    "Four Seasons Hotel",
