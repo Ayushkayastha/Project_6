@@ -40,30 +40,6 @@ class _FavoriteState extends State<Favorite> {
     ),
     ),
 
-    body:
-      Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: ListView.builder(
-        itemCount:FavHotel.length,
-        itemBuilder: (context,index){
-          int favIndex = FavHotel[index];
-          return
-
-            HotelCard(
-              index: favIndex,
-              imageUrl: 'https://via.placeholder.com/150',
-              name: hotelDetails.name[favIndex],
-              location: hotelDetails.address[favIndex],
-              distance: '2 km to city',
-              price: hotelDetails.price[favIndex].toString(),
-              reviews: '80 Reviews',
-              rating: hotelDetails.hotelRatings[favIndex],
-              hotelDetails: hotelDetails,
-            );
-
-        },
-      ),
-    ),
     );
   }
 }

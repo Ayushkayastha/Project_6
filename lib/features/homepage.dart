@@ -8,6 +8,9 @@ import 'package:project6/features/widget/customsearch_delegate.dart';
 import 'package:project6/features/widget/hotel_card.dart';
 import 'package:project6/backend/API/HotelDetails.dart';
 
+import '../config/HotelModel.dart';
+import '../config/network_request.dart';
+
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -160,27 +163,49 @@ class _HomepageState extends State<Homepage> {
 
                 Padding(
                   padding: const EdgeInsets.all(12.0),
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount:hotelDetails.name.length,
-                    itemBuilder: (context,index){
+                  child: FutureBuilder<List<HotelModel>?>(
+                    future: NetworkRequest().hotelmodel(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        // Show loading indicator while waiting for data
+                        return Center(child: CircularProgressIndicator());
+                      }
+                      else if (snapshot.hasError) {
+                        // Handle errors
+                        return Center(child: Text('Error: ${snapshot.error}'));
+                      }
+                      else if (snapshot.hasData && snapshot.data!= null) {
+                        // When data is available
+                        final hotels = snapshot.data!;
+                        return ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: hotels.length,
+                          itemBuilder: (context, index) {
+                            final hotel = hotels[index];
+                            return  HotelCard(
+                              imageUrl: 'https://via.placeholder.com/50',
+                              name: hotel.name??'',
+                              location: hotel.address??'',
+                              distance: '${hotel.distance} km to city',
+                              price: hotel.cheapestPrice.toString(),
+                              reviews: '80 Reviews',
+                              rating: hotelDetails.hotelRatings[index],
+                            );
 
-                      return HotelCard(
-                        index: index,
-                        imageUrl: 'https://via.placeholder.com/50',
-                        name: hotelDetails.name[index],
-                        location: hotelDetails.address[index],
-                        distance: '2 km to city',
-                        price: hotelDetails.price[index].toString(),
-                        reviews: '80 Reviews',
-                        rating: hotelDetails.hotelRatings[index],
-                        hotelDetails: hotelDetails,
-                      );
-
+                          },
+                        );
+                      }
+                      else {
+                        // Handle the case when the data is null
+                        return Center(child: Text('Data is null'));
+                      }
                     },
                   ),
                 ),
+
+
+
               ],
 
             ),

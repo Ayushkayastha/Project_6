@@ -5,7 +5,6 @@ import 'package:project6/features/widget/hotel_profile.dart';
 
 
 class HotelCard extends StatefulWidget {
-  final int index;
   final String imageUrl;
   final String name;
   final String location;
@@ -13,11 +12,9 @@ class HotelCard extends StatefulWidget {
   final String price;
   final String reviews;
   final int rating;
-  final HotelDetails hotelDetails;
 
   const HotelCard({
     Key? key,
-    required this.index,
     required this.imageUrl,
     required this.name,
     required this.location,
@@ -25,7 +22,6 @@ class HotelCard extends StatefulWidget {
     required this.price,
     required this.reviews,
     required this.rating,
-    required this.hotelDetails,
 
   }) : super(key: key);
 
@@ -40,95 +36,81 @@ class _HotelCardState extends State<HotelCard> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: (){
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-            builder: (context) => HotelProfile(
-                index: widget.index),
-            ),
-        );
-      },
-      child: Card(
-        color: Color.fromARGB(255, 243, 243, 243),
-        margin: EdgeInsets.only(bottom: 16.0),
-        child: Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 16.0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8.0),
-                child: Image.network(
-                  widget.imageUrl,
-                  width: 120.0,
-                  height: 120.0,
-                  fit: BoxFit.cover,
-                ),
+    return Card(
+      color: Color.fromARGB(255, 243, 243, 243),
+      margin: EdgeInsets.only(bottom: 16.0),
+      child: Row(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 16.0),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(8.0),
+              child: Image.network(
+                widget.imageUrl,
+                width: 120.0,
+                height: 120.0,
+                fit: BoxFit.cover,
               ),
             ),
-            SizedBox(width: 16.0),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Text(
-                            widget.name,
-                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                            overflow: TextOverflow.ellipsis,
-                          ),
+          ),
+          SizedBox(width: 16.0),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          widget.name,
+                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          overflow: TextOverflow.ellipsis,
                         ),
-                        IconButton(
-                          onPressed: () {
+                      ),
+                      IconButton(
+                        onPressed: () {
 
 
-                            setState(() {
-                              isFavourite = !isFavourite;
+                          setState(() {
+                            isFavourite = !isFavourite;
 
-                                widget.hotelDetails.count[widget.index] = true;
-
-                              print(widget.hotelDetails.count);
-                            });
-                          },
-                          icon: Icon(
-                            isFavourite ? Icons.favorite : Icons.favorite_border,
-                            color: isFavourite ? Colors.red : null,
-                          ),
-                        )
-                      ],
-                    ),
-                    SizedBox(height: 8.0),
-                    Text(widget.location),
-                    Text(widget.distance),
-                    SizedBox(height: 8.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: List.generate(
-                            widget.rating,
-                                (index) => Icon(Icons.star, color: mycolor),
-                          ),
+                          });
+                        },
+                        icon: Icon(
+                          isFavourite ? Icons.favorite : Icons.favorite_border,
+                          color: isFavourite ? Colors.red : null,
                         ),
-                        Text(widget.reviews),
-                      ],
-                    ),
-                    SizedBox(height: 8.0),
-                    Text(
-                      'Rs' + widget.price,
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
+                      )
+                    ],
+                  ),
+                  SizedBox(height: 8.0),
+                  Text(widget.location),
+                  Text(widget.distance),
+                  SizedBox(height: 8.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: List.generate(
+                          widget.rating,
+                              (index) => Icon(Icons.star, color: mycolor),
+                        ),
+                      ),
+                      Text(widget.reviews),
+                    ],
+                  ),
+                  SizedBox(height: 8.0),
+                  Text(
+                    'Rs' + widget.price,
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

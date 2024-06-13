@@ -1,23 +1,24 @@
 import 'package:dio/dio.dart';
-import 'package:project6/config/api_endpoints.dart';
-import 'HotelModel.dart';
+import 'package:project6/config/HotelModel.dart';
+
+import 'api_endpoints.dart';
 
 class NetworkRequest {
   final dio = Dio();
 
-  Future<HotelModel?> hotelmodel() async {
+  Future<List<HotelModel>?> hotelmodel() async {
     try {
       final response = await dio.get(ApiEndpoints.details);
-
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         // Success
         print('joke');
         print(response);
-        return HotelModel.fromJson(response.data);
-      }
-
-      else {
+        List<HotelModel> hotels = (response.data as List)
+            .map((json) => HotelModel.fromJson(json))
+            .toList();
+        return hotels;
+      } else {
         // Failure
         print('Failed to load data: ${response.statusCode}');
         return null;
