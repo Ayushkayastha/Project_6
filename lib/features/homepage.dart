@@ -184,11 +184,8 @@ class _HomepageState extends State<Homepage> {
                           itemBuilder: (context, index) {
                             final hotel = hotels[index];
                             return  HotelCard(
+                              hotel: hotel,
                               imageUrl: 'https://via.placeholder.com/50',
-                              name: hotel.name??'',
-                              location: hotel.address??'',
-                              distance: '${hotel.distance} km to city',
-                              price: hotel.cheapestPrice.toString(),
                               reviews: '80 Reviews',
                               rating: hotelDetails.hotelRatings[index],
                             );

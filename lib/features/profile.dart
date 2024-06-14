@@ -1,34 +1,88 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:project6/features/sub_route/forgot_password.dart';
 
-class Profile extends StatefulWidget {
-  const Profile({super.key});
-
-  @override
-  State<Profile> createState() => _ProfileState();
+void main() {
+  runApp(MyApp());
 }
 
-class _ProfileState extends State<Profile> {
-  final Color myColor = Color.fromARGB(255, 81, 212, 194);
-  final Color darkMyColor = Color.fromARGB(255, 35, 128, 116);
-  final Color compColor = Color(0xFFD45163);
-  final EdgeInsets commonPadding = const EdgeInsets.all(12.0);
-  final double borderRadius = 32.0;
-
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    double screenHeight = MediaQuery.of(context).size.height;
+    return MaterialApp(
+      home: Profile(),
+    );
+  }
+}
 
+class Profile extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Stack(
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 50),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              _buildHeader(),
-              Center(
-                child: _buildLoginForm(screenHeight),
+              SizedBox(height: 50),
+              Text(
+                'Create new Account',
+                style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF51D4C2),
+                ),
+              ),
+              SizedBox(height: 8),
+              GestureDetector(
+                onTap: () {
+                  // Handle navigation to login screen
+                },
+                child: Text(
+                  'Already Registered? Login',
+                  style: TextStyle(
+                    color: Color(0xFF51D4C2),
+                  ),
+                ),
+              ),
+              SizedBox(height: 50),
+              _buildTextField('Please enter your name', 'Aaron Loeb'),
+              SizedBox(height: 20),
+              _buildTextField('Please enter Email', 'hello@reallygreatsite.com'),
+              SizedBox(height: 20),
+              _buildTextField('Please enter Password', '*********', obscureText: true),
+              SizedBox(height: 50),
+              Container(
+                width: double.infinity,
+                height: 50,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  gradient: LinearGradient(
+                    colors: [Color(0xFF51D4C2), Color(0xFF84FFF5)],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                ),
+                child: ElevatedButton(
+                  onPressed: () {
+                    // Handle sign up
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.transparent,
+                    shadowColor: Colors.transparent,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                  ),
+                  child: Text(
+                    'SIGN UP',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
               ),
             ],
           ),
@@ -37,115 +91,25 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  Widget _buildHeader() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
+  Widget _buildTextField(String labelText, String hintText, {bool obscureText = false}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 16.0, top: 40.0),
-          child: Text(
-            'Login',
-            style: TextStyle(
-              color: myColor,
-              fontWeight: FontWeight.bold,
-              fontSize: 48,
+        Text(
+          labelText,
+          style: TextStyle(
+            color: Colors.black54,
+          ),
+        ),
+        SizedBox(height: 8),
+        TextField(
+          obscureText: obscureText,
+          decoration: InputDecoration(
+            hintText: hintText,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(30),
             ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildLoginForm(double screenHeight) {
-    return Container(
-      width: double.infinity,
-      height: screenHeight * 0.45,
-      decoration: BoxDecoration(
-        color: myColor,
-        borderRadius: BorderRadius.circular(borderRadius),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Padding(
-            padding: commonPadding,
-            child: _buildTextFormField('Email', 'Enter email'),
-          ),
-          Padding(
-            padding: commonPadding,
-            child: _buildTextFormField('Password', 'Password'),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ForgotPassword(),
-                ),
-              );
-            },
-            child: Text(
-              'Forgot password?',
-              style: TextStyle(color: darkMyColor),
-            ),
-          ),
-          _buildActionButtons(),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildTextFormField(String label, String hintText) {
-    return TextFormField(
-      decoration: InputDecoration(
-        label: Padding(
-          padding: const EdgeInsets.only(left: 8.0),
-          child: Text(label),
-        ),
-        hintText: hintText,
-        hintStyle: TextStyle(color: Colors.black),
-        labelStyle: TextStyle(color: Colors.black),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.black),
-          borderRadius: BorderRadius.circular(borderRadius),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.black),
-          borderRadius: BorderRadius.circular(borderRadius),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildActionButtons() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        ElevatedButton(
-          onPressed: () {},
-          style: ElevatedButton.styleFrom(
-            backgroundColor: compColor,
-            foregroundColor: Colors.black,
-            elevation: 0,
-            minimumSize: Size(150, 50),
-          ),
-          child: Text(
-            'Sign in',
-            style: TextStyle(fontSize: 16),
-          ),
-        ),
-        ElevatedButton(
-          onPressed: () {},
-          style: ElevatedButton.styleFrom(
-            backgroundColor: compColor,
-            foregroundColor: Colors.black,
-            elevation: 0,
-            minimumSize: Size(150, 50),
-          ),
-          child: Text(
-            'Log in',
-            style: TextStyle(fontSize: 16),
+            contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           ),
         ),
       ],

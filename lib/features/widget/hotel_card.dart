@@ -3,23 +3,19 @@ import 'package:project6/backend/API/HotelDetails.dart';
 import 'package:project6/features/favorite.dart';
 import 'package:project6/features/widget/hotel_profile.dart';
 
+import '../../config/HotelModel.dart';
+
 
 class HotelCard extends StatefulWidget {
+  final HotelModel hotel;
   final String imageUrl;
-  final String name;
-  final String location;
-  final String distance;
-  final String price;
   final String reviews;
   final int rating;
 
   const HotelCard({
     Key? key,
+    required this.hotel,
     required this.imageUrl,
-    required this.name,
-    required this.location,
-    required this.distance,
-    required this.price,
     required this.reviews,
     required this.rating,
 
@@ -36,81 +32,94 @@ class _HotelCardState extends State<HotelCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Color.fromARGB(255, 243, 243, 243),
-      margin: EdgeInsets.only(bottom: 16.0),
-      child: Row(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 16.0),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(8.0),
-              child: Image.network(
-                widget.imageUrl,
-                width: 120.0,
-                height: 120.0,
-                fit: BoxFit.cover,
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => HotelProfile(hotelModel: widget.hotel),
+          ),
+        );
+      },
+      child: Card(
+        color: Color.fromARGB(255, 243, 243, 243),
+        margin: EdgeInsets.only(bottom: 16.0),
+        child: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 16.0),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
+                child: Image.network(
+                  widget.imageUrl,
+                  width: 120.0,
+                  height: 120.0,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
-          ),
-          SizedBox(width: 16.0),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          widget.name,
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                          overflow: TextOverflow.ellipsis,
+            SizedBox(width: 16.0),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            widget.hotel.name??'',
+                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
-                      ),
-                      IconButton(
-                        onPressed: () {
+                        IconButton(
+                          onPressed: () {
 
 
-                          setState(() {
-                            isFavourite = !isFavourite;
+                            setState(() {
+                              isFavourite = !isFavourite;
 
-                          });
-                        },
-                        icon: Icon(
-                          isFavourite ? Icons.favorite : Icons.favorite_border,
-                          color: isFavourite ? Colors.red : null,
+                            });
+                          },
+                          icon: Icon(
+                            isFavourite ? Icons.favorite : Icons.favorite_border,
+                            color: isFavourite ? Colors.red : null,
+                          ),
+                        )
+                      ],
+                    ),
+                    SizedBox(height: 8.0),
+                    Text(widget.hotel.address??''),
+                    Text('${widget.hotel.distance??''} Km from the city'),
+                    SizedBox(height: 8.0),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: List.generate(
+                            widget.rating,
+                                (index) => Icon(Icons.star, color: mycolor),
+                          ),
                         ),
-                      )
-                    ],
-                  ),
-                  SizedBox(height: 8.0),
-                  Text(widget.location),
-                  Text(widget.distance),
-                  SizedBox(height: 8.0),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: List.generate(
-                          widget.rating,
-                              (index) => Icon(Icons.star, color: mycolor),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 12.0),
+                          child: Text(widget.reviews),
                         ),
-                      ),
-                      Text(widget.reviews),
-                    ],
-                  ),
-                  SizedBox(height: 8.0),
-                  Text(
-                    'Rs' + widget.price,
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
-                ],
+                      ],
+                    ),
+                    SizedBox(height: 8.0),
+                    Text(
+                      '${'\$'}${widget.hotel.cheapestPrice}',
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

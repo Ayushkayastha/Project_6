@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:project6/backend/API/HotelDetails.dart';
+import 'package:project6/config/HotelModel.dart';
 
 class HotelProfile extends StatefulWidget {
-  final int index;
-  const HotelProfile({Key? key,required this.index}) : super(key: key);
+  final HotelModel hotelModel;
+  const HotelProfile({Key? key,required this.hotelModel}) : super(key: key);
 
   @override
   State<HotelProfile> createState() => _HotelProfileState();
 }
 
 class _HotelProfileState extends State<HotelProfile> {
-  HotelDetails hotelDetails = HotelDetails();
-
   @override
   Widget build(BuildContext context) {
     Color mycolor =Color.fromARGB(255, 81, 212, 194);
@@ -39,12 +38,11 @@ class _HotelProfileState extends State<HotelProfile> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    hotelDetails.name[widget.index],
+                   widget.hotelModel.name??'',
                     style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 8.0),
-                  Text(
-                    hotelDetails.price[widget.index].toString(),
+                  Text(widget.hotelModel.cheapestPrice.toString(),
                     style: TextStyle(fontSize: 20.0, color: Colors.grey[700]),
                   ),
                   SizedBox(height: 8.0),
