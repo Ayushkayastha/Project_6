@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project6/backend/API/HotelDetails.dart';
 import 'package:project6/config/HotelModel.dart';
+import 'package:project6/features/widget/button.dart';
 
 class HotelProfile extends StatefulWidget {
   final HotelModel hotelModel;
@@ -42,15 +43,35 @@ class _HotelProfileState extends State<HotelProfile> {
                     style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 8.0),
-                  Text(widget.hotelModel.cheapestPrice.toString(),
+                  Text(widget.hotelModel.address??'',
+                    style: TextStyle(fontSize: 20.0, color: Colors.grey[700]),),
+                  SizedBox(height: 8.0),
+                  Text('Starts form \$'+widget.hotelModel.cheapestPrice.toString(),
                     style: TextStyle(fontSize: 20.0, color: Colors.grey[700]),
                   ),
                   SizedBox(height: 8.0),
                   Text(
-                    'Sleeps 3 people',
+                    'Distance: ${widget.hotelModel.distance ?? 'N/A'} km from capital',
                     style: TextStyle(fontSize: 16.0, color: Colors.grey[600]),
                   ),
                   SizedBox(height: 16.0),
+                  Text(
+                     widget.hotelModel.title ?? 'N/A',
+                    style: TextStyle(fontSize: 16.0, color: Colors.grey[600]),
+                  ),
+                  SizedBox(height: 16.0),
+
+                  Divider(
+                      color: Colors.grey[600], // The color of the line
+                    thickness: 2, // The thickness of the line
+                  ),
+
+                  SizedBox(height: 16.0),
+                  Row(children: [
+                    Text('Description'),
+                  ],),
+                  Text(widget.hotelModel.desc??''),
+
 
                 ],
               ),
@@ -67,21 +88,7 @@ class _HotelProfileState extends State<HotelProfile> {
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(24.0),
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: mycolor,
-                        foregroundColor: Color.fromARGB(255,255,255,255),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(14.0),
-                        child: Text('Select Rooms',
-                          style: TextStyle(
-                             fontSize: 16,
-                          ),
-                        ),
-                      ),
-                    ),
+                    child: button('Select room',(){}),
                   ),
                 ),
               ],

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:project6/features/sub_route/filter.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
+import 'package:project6/features/widget/button.dart';
 import 'package:project6/features/widget/customsearch_delegate.dart';
 import 'package:project6/features/widget/hotel_card.dart';
 import 'package:project6/backend/API/HotelDetails.dart';
@@ -275,23 +276,13 @@ class _HomepageState extends State<Homepage> {
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.all( 16.0),
-                        child: ElevatedButton(
-                            onPressed: () {
-                              setState(() {
-                                _isDatePickerVisible = !_isDatePickerVisible;
-                              });
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: mycolor,
-                              foregroundColor: Color.fromARGB(255,255,255,255),
-                            ),
-
-
-                            child: Padding(
-                              padding: const EdgeInsets.all(14.0),
-                              child: Text('Apply',style: TextStyle(fontSize: 16),),
-                            ),
-                        ),
+                        child: button(
+                          'Apply',
+                              () {
+                          setState(() {
+                            _isDatePickerVisible = !_isDatePickerVisible;
+                          });
+                        },)
                       ),
                     ),
                   ],
