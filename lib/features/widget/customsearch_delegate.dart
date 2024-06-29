@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 //this class is for searching
 
 class CustomSearchDelegate extends SearchDelegate{
-
   List<String> searchTerm=[
     "The Ritz-Carlton",
     "Four Seasons Hotel",

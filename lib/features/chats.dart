@@ -13,7 +13,7 @@ class _ChatsState extends State<Chats> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder<List<HotelModel>?>(
+      /*body: FutureBuilder<List<HotelModel>?>(
         future: NetworkRequest().hotelmodel(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -57,7 +57,7 @@ class _ChatsState extends State<Chats> {
             return Center(child: Text('Data is null'));
           }
         },
-      ),
+      ),*/
     );
   }
 }

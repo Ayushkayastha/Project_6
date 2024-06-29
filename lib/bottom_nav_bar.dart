@@ -15,7 +15,7 @@ class Bottomnavbar extends StatefulWidget {
 
 class _BottomnavbarState extends State<Bottomnavbar> {
   int bottomNavIndex = 0;
-  bool isLoggedIn = false; // Added to manage login state
+  bool isLoggedIn = true; // Added to manage login state
 
   void _handleLoginSuccess() {
     setState(() {
@@ -28,9 +28,8 @@ class _BottomnavbarState extends State<Bottomnavbar> {
   Widget build(BuildContext context) {
     Color mycolor = Colors.black;
     return Scaffold(
-      body: isLoggedIn ? bottomnavBody(bottomNavIndex) : LoginPage(onLoginSuccess: _handleLoginSuccess),
-      bottomNavigationBar: isLoggedIn
-          ? BottomNavigationBar(
+      body:bottomnavBody(bottomNavIndex),
+      bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(
             activeIcon: Icon(Icons.home, color: mycolor),
@@ -60,7 +59,7 @@ class _BottomnavbarState extends State<Bottomnavbar> {
           });
         },
       )
-          : null,
+         
     );
   }
 
@@ -73,7 +72,7 @@ class _BottomnavbarState extends State<Bottomnavbar> {
       case 2:
         return Chats();
       default:
-        return Profile();
+        return LoginPage();
     }
   }
 }

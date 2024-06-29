@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:project6/backend/API/HotelDetails.dart';
 import 'package:project6/features/favorite.dart';
 import 'package:project6/features/widget/hotel_profile.dart';
+import 'package:provider/provider.dart';
 
 import '../../config/HotelModel.dart';
+import '../datas.dart';
 
 
 class HotelCard extends StatefulWidget {
@@ -11,6 +13,7 @@ class HotelCard extends StatefulWidget {
   final String imageUrl;
   final String reviews;
   final int rating;
+  final int index;
 
   const HotelCard({
     Key? key,
@@ -18,6 +21,7 @@ class HotelCard extends StatefulWidget {
     required this.imageUrl,
     required this.reviews,
     required this.rating,
+    required this.index,
 
   }) : super(key: key);
 
@@ -74,20 +78,26 @@ class _HotelCardState extends State<HotelCard> {
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
-                        IconButton(
-                          onPressed: () {
-
-
-                            setState(() {
-                              isFavourite = !isFavourite;
-
-                            });
+                        Consumer<Datas>(
+                          builder: (context, datas, child) {
+                            bool isFavourite = datas.fav.contains(widget.index);
+                            return IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  if (isFavourite) {
+                                    Provider.of<Datas>(context, listen: false).sub_from_fav(widget.index);
+                                  } else {
+                                    Provider.of<Datas>(context, listen: false).add_to_fav(widget.index);
+                                  }
+                                });
+                              },
+                              icon: Icon(
+                                isFavourite ? Icons.favorite : Icons.favorite_border,
+                                color: isFavourite ? Colors.red : null,
+                              ),
+                            );
                           },
-                          icon: Icon(
-                            isFavourite ? Icons.favorite : Icons.favorite_border,
-                            color: isFavourite ? Colors.red : null,
-                          ),
-                        )
+                        ),
                       ],
                     ),
                     SizedBox(height: 8.0),

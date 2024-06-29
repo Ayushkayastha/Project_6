@@ -189,6 +189,7 @@ class _HomepageState extends State<Homepage> {
                               imageUrl: 'https://via.placeholder.com/50',
                               reviews: '80 Reviews',
                               rating: hotelDetails.hotelRatings[index],
+                              index: index,
                             );
 
                           },

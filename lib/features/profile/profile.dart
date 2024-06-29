@@ -55,7 +55,7 @@ class _ProfileState extends State<Profile> {
                       ),
                       SizedBox(height: 10),
                       Text(
-                        'Anna Avetisyan',
+                        'Sezal baniya',
                         style: TextStyle(
                           fontSize: 24,
                           color: Colors.white,
@@ -68,17 +68,23 @@ class _ProfileState extends State<Profile> {
               ],
             ),
             SizedBox(height: 30),
-            buildProfileItem(context, Icons.person, 'Anna Avetisyan'),
-            buildProfileItem(context, Icons.cake, 'Birthday'),
-            buildProfileItem(context, Icons.phone, '818 123 4567'),
+            buildProfileItem(context, Icons.person, 'Sezal Baniya'),
+            buildProfileItem(context, Icons.cake, '2002/04/14'),
+            buildProfileItem(context, Icons.phone, '9861535353'),
             buildProfileItem(context, Icons.camera_alt, 'Instagram account'),
-            buildProfileItem(context, Icons.email, 'info@aplusdesign.co'),
+            buildProfileItem(context, Icons.email, 'sezal@gmail.com'),
             buildProfileItem(context, Icons.visibility, 'Password'),
             SizedBox(height: 30),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 32.0),
-              child:button('Edit profile',(){})
+              child: button('Edit Profile',(){}),
             ),
+            SizedBox(height: 30),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32.0),
+              child: button('Log out',(){}),
+            ),
+
           ],
         ),
       ),

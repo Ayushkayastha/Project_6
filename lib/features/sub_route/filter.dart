@@ -15,13 +15,13 @@ class MyApp extends StatelessWidget {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          primary: Color.fromARGB(255, 81, 212, 194), // Button color
-          onPrimary: Colors.white, // Text color
+          foregroundColor: Colors.white,
+          backgroundColor: Color.fromARGB(255, 81, 212, 194), // Text color
         ),
       ),
       textTheme: TextTheme(
-        bodyText1: TextStyle(color: Color.fromARGB(255, 81, 212, 194)),
-        bodyText2: TextStyle(color: Color.fromARGB(255, 81, 212, 194)),
+        bodyLarge: TextStyle(color: Color.fromARGB(255, 81, 212, 194)),
+        bodyMedium: TextStyle(color: Color.fromARGB(255, 81, 212, 194)),
       ),
       sliderTheme: SliderThemeData(
         activeTrackColor: Color.fromARGB(255, 81, 212, 194),
